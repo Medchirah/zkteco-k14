@@ -22,6 +22,8 @@ class ShifttimeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document';
     protected static ?string $navigationGroup = 'shifttime management';
+   // protected static ?string $recordTitleAttribute = 'shifttimes';
+   protected static ?string $modelLabel = 'emplois du temps';
     
 
     public static function form(Form $form): Form
@@ -54,8 +56,8 @@ class ShifttimeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')->sortable(),
-               BadgeColumn::make('name')
+                
+               BadgeColumn::make('name')->label('Nom '."d'emploi du temps")->icon('heroicon-s-calendar')
                  ->colors([
                          'primary',
                          'secondary' => 'draft',
@@ -63,18 +65,18 @@ class ShifttimeResource extends Resource
                          'success' => 'published',
                          'danger' => 'rejected',
     ])->searchable(),
-                Tables\Columns\TextColumn::make('date_entre'),
-                Tables\Columns\TextColumn::make('date_sortie'),
-                Tables\Columns\TextColumn::make('p_entre'),
-                Tables\Columns\TextColumn::make('p_sortie'),
-                Tables\Columns\TextColumn::make('debut_entre'),
-                Tables\Columns\TextColumn::make('fin_entre'),
-                Tables\Columns\TextColumn::make('debut_sortie'),
-                Tables\Columns\TextColumn::make('fin_sortie'),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                 BadgeColumn::make('date_entre'),
+                 BadgeColumn::make('date_sortie'),
+                 BadgeColumn::make('p_entre'),
+                 BadgeColumn::make('p_sortie'),
+                 BadgeColumn::make('debut_entre'),
+                 BadgeColumn::make('fin_entre'),
+                 BadgeColumn::make('debut_sortie'),
+                 BadgeColumn::make('fin_sortie'),
+                //Tables\Columns\TextColumn::make('created_at')
+                  //  ->dateTime(),
+                //Tables\Columns\TextColumn::make('updated_at')
+                  //  ->dateTime(),
             ])
             ->filters([
                 SelectFilter::make('shifttime_name')

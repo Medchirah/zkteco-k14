@@ -10,6 +10,7 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Card;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\BadgeColumn;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,6 +24,7 @@ class PermissionResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-lock-closed';
     protected static ?string $navigationGroup = 'Users management';
     protected static ?int $navigationSort = 3;
+  //  protected static ?string $recordTitleAttribute = 'permissions';
 
 
     public static function form(Form $form): Form
@@ -42,8 +44,8 @@ class PermissionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
-                TextColumn::make('name')
+                BadgeColumn::make('name'),
+                BadgeColumn::make('name')
             ])
             ->filters([
                 //

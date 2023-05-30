@@ -43,9 +43,9 @@ class newtablePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, newtable $newtable): bool
+    public function delete(User $user, newtable $newtable)
     {
-        //
+        return $user->hasRole('Repport');
     }
 
     /**

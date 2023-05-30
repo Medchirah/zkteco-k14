@@ -39,8 +39,12 @@ class employe extends Model implements HasMedia
    
        return $this->belongsTo(device::class);
     }
-    public function shifttime()
-     {
-      return $this->belognsToMany(shifttime::class,'tabletime');
-     }
+    public function tabletime(): HasMany
+    {
+        return $this->hasMany(tabletime::class);
+    }
+    public function shifttime(): HasMany
+    {
+        return $this->belongsToMany(shifttime::class);
+    }
 }

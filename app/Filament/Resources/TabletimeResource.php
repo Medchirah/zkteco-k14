@@ -15,6 +15,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Builder;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Resources\TabletimeResource\Pages;
@@ -27,7 +28,9 @@ class TabletimeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $navigationGroup = 'shifttime management';
-    protected static ?string $recordTitleAttribute = 'employe.nom';
+   // protected static ?string $recordTitleAttribute = 'tabletimes';
+   protected static ?string $modelLabel = 'employe<=emploi du temps';
+
     
 
     public static function form(Form $form): Form
@@ -57,9 +60,9 @@ class TabletimeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id'),
-                TextColumn::make('employe.nom')->sortable()->searchable(),
-                TextColumn::make('shifttime.name')->sortable()->searchable(),
+              //  Tables\Columns\TextColumn::make('id'),
+                BadgeColumn::make('employe.nom')->sortable()->searchable()->icon('heroicon-s-user')->color('warning'),
+                BadgeColumn::make('shifttime.name')->label('Emploi du temps')->sortable()->searchable()->color('warning'),
                 Tables\Columns\TextColumn::make('date_debut')
                 ->sortable()
                 ->date(),
@@ -69,12 +72,13 @@ class TabletimeResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('tous les  employes:')->relationship('employe', 'nom')
-                ->label('  employe'),
+                ->label('  Employes'),
                 SelectFilter::make('tous les  shifttimes:')->relationship('shifttime', 'name')
-                ->label(' shifttime: ')
+                ->label(' Emploi du temps: ')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

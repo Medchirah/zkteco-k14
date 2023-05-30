@@ -19,7 +19,7 @@ class ManageEmployes extends ManageRecords
             Actions\CreateAction::make(),
         ];
     }
-    protected function getHeaderWidgets():array{
+    protected function getFooterWidgets():array{
         return[
             employeStatsOverview::class,
         ];

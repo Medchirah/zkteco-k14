@@ -39,8 +39,10 @@
         border-radius: 10px
 
     }
+    
 </style>
 <body>
+    
     <form action="" method="get" class="form">
         <input type="text" name="query" value="" placeholder="customize your report" class="input">
         <input type="text" name="condition" value="" placeholder="enter condition" class="input">
@@ -58,6 +60,7 @@
         <th class="titre">check-out</th>
         <th class="titre">duration</th>
         <th class="titre">date jour</th>
+        <th class="titre">temps de retard</th>
 
     </tr>  
  
@@ -73,6 +76,7 @@
         <td class="information">{{$employe->time_out}}</td>
         <td class="information">{{$employe->durration}}</td>
         <td class="information">{{$employe->created_at}}</td>
+        <td class="information"> {{ $employe->durration}}</td>
         
         
     </tr>  

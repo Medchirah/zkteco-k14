@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\DB;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('', [EmployeController::class, 'report'])->name('report');
+Route::get('/newtables', [EmployeController::class, 'report'])->name('report');

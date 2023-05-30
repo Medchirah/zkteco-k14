@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rapports', function (Blueprint $table) {
-            $table->id();
-            $table->string('tittle');
-            $table->string('description');
-            $table->string('request');
-            $table->string('condition');
-            $table->timestamps();
+        Schema::table('newtables', function (Blueprint $table) {
+            $table->time('late_out');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rapports');
+        Schema::table('newtables', function (Blueprint $table) {
+            $table->dropColumn('late_out');
+        });
     }
 };

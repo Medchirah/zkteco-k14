@@ -16,6 +16,7 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Tables\Actions\DeleteBulkAction;
 use App\Filament\Resources\DeviceResource\Pages;
@@ -32,6 +33,8 @@ class DeviceResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-device-tablet';
     protected static ?string $navigationGroup = 'Devices/Timerecords management';
+    //protected static ?string $recordTitleAttribute = 'device';
+    protected static ?string $modelLabel = 'pointeuse';
 
     public static function form(Form $form): Form
     {
@@ -58,14 +61,21 @@ class DeviceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nomDevice')
+                BadgeColumn::make('nomDevice')->label('Nom de pointeuse')->icon('heroicon-s-device-tablet')
+                ->searchable()
+                ->colors([
+                    'primary',
+                    'secondary' => 'reviewing',
+                    'warning' => 'draft',
+                    'success' => 'published',
+                    'danger' => 'rejected',
+]),
+                Tables\Columns\TextColumn::make('adress_ip')->size('lg')
                 ->searchable(),
-                Tables\Columns\TextColumn::make('adress_ip')
-                ->searchable(),
-                Tables\Columns\TextColumn::make('port')
+                Tables\Columns\TextColumn::make('port')->size('lg')
                 ->searchable()
                 ->sortable(),
-                Tables\Columns\IconColumn::make('connect')
+                Tables\Columns\IconColumn::make('connect')->label('connectee')
                     ->searchable()
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -84,6 +94,7 @@ class DeviceResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

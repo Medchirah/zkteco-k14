@@ -17,6 +17,7 @@ use App\Filament\Widgets\StatsOverview;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -36,7 +37,7 @@ class EmployeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-identification';
     protected static ?string $navigationGroup = ' Employes/Departement management';
-    protected static ?string $recordTitleAttribute = 'nom';
+   // protected static ?string $recordTitleAttribute = 'nom';
 
     public static function form(Form $form): Form
     {
@@ -73,18 +74,25 @@ class EmployeResource extends Resource
     {
         return $table
             ->columns([
-               TextColumn::make('id')
-                ->sortable(),
+             //  TextColumn::make('id')
+              //  ->sortable(),
                 
-                TextColumn::make('nom')->sortable(),
-                TextColumn::make('device.nomDevice')->sortable(),
-                TextColumn::make('departement.nomDept')->sortable(),
-                ImageColumn::make('photo'),
-                TextColumn::make('gender') ,
-                TextColumn::make('empriente'),
+                BadgeColumn::make('nom')->sortable()->searchable()->weight('semibold')->icon('heroicon-s-user')->colors([
+                    'primary',
+                    'secondary' => 'reviewing',
+                    'warning' => 'draft',
+                    'success' => 'published',
+                    'danger' => 'rejected',
+]),
+                BadgeColumn::make('device.nomDevice')->label('Pointeuse')->sortable()->searchable()->icon('heroicon-s-device-tablet'),
+                BadgeColumn::make('departement.nomDept')->sortable()->searchable()->icon('heroicon-s-library'),
+                ImageColumn::make('photo')->circular(),
+                TextColumn::make('gender')->label('Sexe') ->size('lg')->searchable(),
+                TextColumn::make('empriente')->size('lg'),
                 TextColumn::make('date_travail')
                     ->sortable()
-                    ->date(),
+                    ->date()
+                    ->color('primary'),
                 TextColumn::make('created_at')
                     ->dateTime(),
                 

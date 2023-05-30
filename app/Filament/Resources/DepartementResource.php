@@ -10,6 +10,7 @@ use Filament\Resources\Table;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,6 +24,7 @@ class DepartementResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-library';
     protected static ?string $navigationGroup = ' Employes/Departement management';
+    protected static ?string $recordTitleAttribute = 'nomDept';
    
 
     public static function form(Form $form): Form
@@ -41,8 +43,15 @@ class DepartementResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->sortable(),
-                TextColumn::make('nomDept')->searchable()->sortable(),
+               // TextColumn::make('id')->sortable(),
+                BadgeColumn::make('nomDept')->searchable()->sortable()->icon('heroicon-s-library')->weight('semibold')
+                ->colors([
+                    'primary',
+                    'secondary' => 'reviewing',
+                    'warning' => 'draft',
+                    'success' => 'published',
+                    'danger' => 'rejected',
+]),
                 TextColumn::make('created_at')
                     ->dateTime(),
                 TextColumn::make('updated_at')

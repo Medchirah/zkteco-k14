@@ -10,6 +10,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class newtable extends Model
 {
     use HasFactory;
-    protected $fillable=['nom_employe','nom_departement','gender','date debut de thavaille','device','shifttime','check-In','check-out','duration','date jour'];
+    protected $fillable=['nom_employe','nom_departement','gender','date debut de thavaille','device','shifttime','check-In','check-out','duration','date jour','late_in','late_out','early_in','early_out'];
     
 }

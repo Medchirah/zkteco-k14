@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\TimerecordResource\Pages;
 
-use App\Filament\Resources\TimerecordResource;
 use Filament\Pages\Actions;
 use Filament\Resources\Pages\ListRecords;
+use App\Filament\Resources\TimerecordResource;
+use App\Filament\Resources\TimerecordResource\Widgets\timerecordStatsOverview;
 
 class ListTimerecords extends ListRecords
 {
@@ -16,4 +17,11 @@ class ListTimerecords extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+    protected function getFooterWidgets(): array
+    {
+        return[
+            timerecordStatsOverview::class,
+        ];
+    }
+
 }

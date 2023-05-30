@@ -24,4 +24,8 @@ class shifttime extends Model
      {
       return $this->belongsToMany(employe::class,'tabletime');
      }
+     public function tabletime()
+     {
+        return $this->hasMany(tabletime::class);
+     }
 }
